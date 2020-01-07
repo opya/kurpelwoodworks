@@ -1,7 +1,7 @@
 require "roda"
 
 class Kurpelwoodworks < Roda
-  plugin :static, ['/webfonts', '/images']
+  plugin :static, ['/assets/webfonts', '/assets/images']
   plugin :render,
     esacape: true,
     views: "./public/templates",
