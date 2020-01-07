@@ -6,6 +6,9 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "puma"
 gem "roda"
+gem "roda-i18n"
 gem "rake"
 gem "tilt"
 gem "sassc"
+
+gem "pry"
