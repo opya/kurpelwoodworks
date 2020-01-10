@@ -15,23 +15,29 @@ class Kurpelwoodworks < Roda
 
   route do |r|
     r.assets
-    r.i18n_set_locale_from(:params)
 
+    #NOTE if no locale is present
 	r.root do
 	  view("home")
 	end
 
-	r.on "about" do
-	  view("about")
-	end
+    r.locale do
+      r.root do
+        view("home")
+      end
 
-	r.on "portfolio" do
-	  view("portfolio")
-	end
+      r.on "about" do
+        view("about")
+      end
 
-	r.on "contacts" do
-	  view("contacts")
-	end
+      r.on "portfolio" do
+        view("portfolio")
+      end
+
+      r.on "contacts" do
+        view("contacts")
+      end
+    end
   end
 end
 
