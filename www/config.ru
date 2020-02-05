@@ -7,7 +7,8 @@ class Kurpelwoodworks < Roda
 
   use RodaSessionMiddleware, secret: '1'*64
   plugin :static, ['/assets/webfonts', '/assets/images']
-  plugin :render, esacape: true, views: "./public/templates", template_opts: {default_encoding: 'UTF-8'}
+  plugin :render, esacape: true, views: "./public/templates",
+          template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: ['navbar.js'], path: "./"
   plugin :i18n, locale: SUPPORTED_LOCALES, default_locale: :bg
   plugin :common_logger, $stdout
@@ -34,10 +35,16 @@ class Kurpelwoodworks < Roda
       view("contacts")
     end
 
-    r.get "locale", String do |locale_sym|
-      session[:locale] = locale_sym if SUPPORTED_LOCALES.include?(locale_sym)
+    r.get "locale", String do |locale|
+      change_locale(locale)
       r.redirect r.referer
     end
+  end
+
+  private
+
+  def change_locale(locale)
+    session[:locale] = locale if SUPPORTED_LOCALES.include?(locale)
   end
 end
 
