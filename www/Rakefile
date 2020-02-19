@@ -1,8 +1,0 @@
-require 'fileutils'
-
-desc "Rebuild kurpelwoodworks.com assets (sass and js minify)"
-
-task :rebuild_assets do
-  FileUtils.mkdir_p  "./public/assets"
-  system("sassc -I ./src/scss -t compressed ./css/theme.scss > ./public/assets/all.css")
-end
