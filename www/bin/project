@@ -6,7 +6,7 @@ require 'pry'
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: example.rb [options]"
+  opts.banner = "Usage: project [options]"
 
   opts.on("-n", "New Project procedure.") do |o|
     options[:new] = o
@@ -14,6 +14,10 @@ OptionParser.new do |opts|
 
   opts.on("-u NAME", "Update Project procedure with name.") do |o|
     options[:update] = o
+  end
+
+  opts.on("-d", "Debug mode, log db interaction.") do |o|
+    options[:debug] = o
   end
 end.parse!
 
@@ -28,7 +32,7 @@ require 'logger'
 require 'tempfile'
 
 DB = Sequel.connect("sqlite://#{KURPEL_DB}")
-#DB.loggers << Logger.new($stdout)
+DB.loggers << Logger.new($stdout) if options.has_key? :debug
 
 require_relative '../entities/project'
 
@@ -62,7 +66,7 @@ if options.has_key? :new
         system("vim #{description_tmp_file.path}")
 
         description_value = File.read(description_tmp_file.path)
-        project[key] = description_value
+        project[key] = description_value.strip
 
         p description_value
 
@@ -84,6 +88,7 @@ if options.has_key? :new
   end
 
   if project.valid?
+    project.save
     p "Successfully created project with name '#{project.name}'"
   else
     project.errors.each do |key, error|

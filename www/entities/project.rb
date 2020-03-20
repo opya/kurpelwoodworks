@@ -9,7 +9,11 @@ class Project < Sequel::Model
     errors.add(:completed, 'is invalid date') unless validate_date(completed)
   end
 
-  private
+  def around_save
+    self.started = Date.parse(self.started).to_time.to_i
+    self.completed = Date.parse(self.completed).to_time.to_i
+    super
+  end
 
   def validate_date(date)
     begin
