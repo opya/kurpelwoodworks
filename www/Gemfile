@@ -10,5 +10,6 @@ gem "roda-i18n"
 gem "rake"
 gem "tilt"
 gem "sassc"
-
+gem "sequel"
+gem "sqlite3"
 gem "pry"

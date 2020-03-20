@@ -9,7 +9,7 @@ class Kurpelwoodworks < Roda
   plugin :static, ['/assets/webfonts', '/assets/images']
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
-  plugin :assets, css: ['all.scss'], js: ['navbar.js'], path: "./"
+  plugin :assets, css: ['all.scss'], js: ['navbar.js'], path: "./assets"
   plugin :i18n, locale: SUPPORTED_LOCALES, default_locale: :bg
   plugin :common_logger, $stdout
 

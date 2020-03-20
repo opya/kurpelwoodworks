@@ -7,9 +7,8 @@
     <%= assets(:js) %>
   </head>
   <body>
-    <section class="section yellow-bg">
+    <section class="section yellow-bg" style="background-color: #7B9A48;">
       <div class="container">
-
         <nav class="navbar transparent-bg" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-item" href="/">
@@ -24,16 +23,14 @@
           </div>
           <div class="navbar-menu" id="navbar-main">
             <div class="navbar-start">
-              <a class="navbar-item" href="portfolio">Портфолио</a>
-              <a class="navbar-item" href="about">За нас</a>
-              <a class="navbar-item" href="contacts">Контанкти</a>
+              <a class="navbar-item" href="portfolio"><%= t.menu.portfolio %></a>
+              <a class="navbar-item" href="about"><%= t.menu.about_us %></a>
+              <a class="navbar-item" href="contacts"><%= t.menu.contacts %></a>
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="#">
-                  Език
-                </a>
+                <a class="navbar-link" href="#"><%= t.menu.language %></a>
                 <div class="navbar-dropdown">
-                  <a class="navbar-item" href="locale/bg">Български&nbsp;<span class="flag flag-bg"></span></a>
-                  <a class="navbar-item" href="locale/en">English&nbsp;<span class="flag flag-gb"></span></a>
+                  <a class="navbar-item" href="locale/bg"><%= t.menu.lang.bg %>&nbsp;<span class="flag flag-bg"></span></a>
+                  <a class="navbar-item" href="locale/en"><%= t.menu.lang.en %>&nbsp;<span class="flag flag-gb"></span></a>
                 </div>
               </div>
             </div>
@@ -47,7 +44,11 @@
             </a>
           </div>
         </nav>
+      </div>
+    </section>
 
+    <section class="section" style="background-color: #3F4133;">
+      <div class="container">
         <%= yield %>
       </div>
     </section>
