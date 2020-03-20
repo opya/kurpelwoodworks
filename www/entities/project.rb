@@ -15,6 +15,8 @@ class Project < Sequel::Model
     super
   end
 
+  private
+
   def validate_date(date)
     begin
       Date.parse(date)
