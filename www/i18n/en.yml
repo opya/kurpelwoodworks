@@ -1,9 +1,10 @@
-menu:
-    portfolio: Portfolio
-    about_us: About us
-    contacts: Contacts
-    language: Language
-    lang:
-        bg: Bulgarian
-        en: English
-home_message: test
+en:
+    menu:
+        portfolio: Portfolio
+        about_us: About us
+        contacts: Contacts
+        language: Language
+        lang:
+            bg: Bulgarian
+            en: English
+    home_message: test

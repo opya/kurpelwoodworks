@@ -1,8 +1,15 @@
+require 'mobility'
+
 class Project < Sequel::Model
-  one_to_many :project_images
+  plugin :mobility
+
+  translates :name, backend: :key_value, type: :string
+  translates :description, backend: :key_value, type: :text
 
   def validate
     super
+
+    errors.add(:work_name, 'cannot be empty') if !work_name || work_name.empty?
     errors.add(:name, 'cannot be empty') if !name || name.empty?
     errors.add(:description, 'cannot be empty') if !description || description.empty?
     errors.add(:started, 'is invalid date') unless validate_date(started)
@@ -12,6 +19,7 @@ class Project < Sequel::Model
   def around_save
     self.started = Date.parse(self.started).to_time.to_i
     self.completed = Date.parse(self.completed).to_time.to_i
+
     super
   end
 
@@ -19,7 +27,7 @@ class Project < Sequel::Model
 
   def validate_date(date)
     begin
-      Date.parse(date)
+      DateTime.strptime(date.to_s, '%s')
     rescue StandardError
       return false
     end

@@ -1,9 +1,10 @@
-menu:
-    portfolio: Портфолио
-    about_us: За нас
-    contacts: Контакти
-    language: Език
-    lang:
-        bg: Български
-        en: Английски
-home_message: тест
+bg:
+    menu:
+        portfolio: Портфолио
+        about_us: За нас
+        contacts: Контакти
+        language: Език
+        lang:
+            bg: Български
+            en: Английски
+    home_message: тест
