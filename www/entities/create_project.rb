@@ -1,66 +1,32 @@
 class CreateProject
   PROJECT_PARAMS = [:work_name, :name, :description, :started, :completed]
-  ASK_FOR_INPUT = "Enter value for %s"
+  ASK_FOR_INPUT = "%s: %s "
 
   attr_accessor :project
 
   def initialize(project)
     @project = project
+    @project_params = PROJECT_PARAMS.to_enum
+    @pp_cursor = @project_params.next
   end
 
   def run
     while true do
-      PROJECT_PARAMS.each do |key|
-        puts sprintf(ASK_FOR_INPUT, key)
-        if !project.new? and key != :description
-          puts "Current #{key}: " + project.send("#{key}").to_s
+      print ask_for_input
+
+      begin
+        case @pp_cursor
+        when :work_name, :name, :started, :completed
+          standard_requirements
+        when :description
+          description_requirements
         end
-
-        if key == :description
-          description_tmp_file = Tempfile.new
-
-          File.open(description_tmp_file.path, "w") do |f|
-            f.write(sprintf(ASK_FOR_INPUT, key))
-          end
-
-          system("vim #{description_tmp_file.path}")
-
-          project.description = File.read(description_tmp_file.path).strip
-
-          PROJECT_PARAMS.delete(key)
-        else
-          arg = read_line
-
-          if project.new?
-            unless arg.length == 0
-              project.send("#{key}=", arg)
-              PROJECT_PARAMS.delete(key)
-            end
-          else
-            project.send("#{key}=", arg) unless arg.length == 0
-            PROJECT_PARAMS.delete(key)
-          end
-        end
-
+      rescue StopIteration
         break
       end
-
-      break if PROJECT_PARAMS.length == 0
     end
-    
-    if project.valid?
-      if project.new?
-        puts "Successfully created project with name '#{project.work_name}'"
-      else
-        puts "Successfully updated project with name '#{project.work_name}'"
-      end
 
-      project.save
-    else
-      project.errors.each do |key, error|
-        puts "#{key.to_s} #{error.first}"
-      end
-    end
+    save_project
   end
 
   private
@@ -74,6 +40,51 @@ class CreateProject
     end
 
     arg
+  end
+
+  def standard_requirements
+    arg = read_line
+    @project.send("#{@pp_cursor}=", arg) if (arg && arg.length != 0)
+    project_params_next
+  end
+
+  def description_requirements
+    description_tmp_file = Tempfile.new
+
+    _description = @project.new? ? ask_for_input : @project.send("#{@pp_cursor}")
+
+    File.open(description_tmp_file.path, "w") do |f|
+      f.write(_description)
+    end
+
+    system("vim #{description_tmp_file.path}")
+
+    project.description = File.read(description_tmp_file.path).strip
+
+    project_params_next
+
+    puts ""
+  end
+
+  def project_params_next
+    @pp_cursor = @project_params.next
+  end
+
+  def save_project
+    if @project.valid?
+      @project.save
+
+      action = @project.new? ? 'created' : 'updated'
+      puts "Successfully #{action} project with work name '#{@project.work_name}'"
+    else
+      @project.errors.each do |key, error|
+        puts "#{key.to_s} #{error.first}"
+      end
+    end
+  end
+
+  def ask_for_input
+    sprintf(ASK_FOR_INPUT, @pp_cursor, @project.send("#{@pp_cursor}").to_s)
   end
 end
 

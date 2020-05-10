@@ -8,8 +8,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: project [options]"
 
-  opts.on("-l LOCALE", "When updating project, set locale to update name and " + \
-                "description for given locale\n") do |o|
+  opts.on("-l LOCALE", "When updating project, set locale\n") do |o|
     options[:locale] = o 
   end
 
