@@ -16,15 +16,7 @@ class Project < Sequel::Model
     errors.add(:completed, 'is invalid date') unless validate_date(self[:completed])
   end
 
-  def around_save
-    self[:started] = Date.parse(started).to_time.to_i if started
-    self[:completed] = Date.parse(completed).to_time.to_i if completed
-
-    super
-  end
-
   def started
-    binding.pry
     Time.at(self[:started]).strftime("%Y-%m-%d") if self[:started]
   end
 

@@ -12,12 +12,14 @@ class CreateProject
 
   def run
     while true do
-      print ask_for_input
+      ask_for_input
 
       begin
         case @pp_cursor
-        when :work_name, :name, :started, :completed
+        when :work_name, :name
           standard_requirements
+        when :started, :completed
+          started_completed_requirements
         when :description
           description_requirements
         end
@@ -45,6 +47,17 @@ class CreateProject
   def standard_requirements
     arg = read_line
     @project.send("#{@pp_cursor}=", arg) if (arg && arg.length != 0)
+    project_params_next
+  end
+
+  def started_completed_requirements
+    arg = read_line
+
+    if (arg && arg.length != 0)
+      key = Date.parse(arg).to_time.to_i
+      @project.send("#{@pp_cursor}=", key) 
+    end
+
     project_params_next
   end
 
@@ -84,7 +97,7 @@ class CreateProject
   end
 
   def ask_for_input
-    sprintf(ASK_FOR_INPUT, @pp_cursor, @project.send("#{@pp_cursor}").to_s)
+    print sprintf(ASK_FOR_INPUT, @pp_cursor, @project.send("#{@pp_cursor}").to_s)
   end
 end
 
