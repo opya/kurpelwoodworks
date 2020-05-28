@@ -20,34 +20,18 @@ OptionParser.new do |opts|
     options[:update] = o
   end
 
-  opts.on("-d", "Debug mode, log db interaction.") do |o|
-    options[:debug] = o
-  end
-
-  opts.on("-D", "IRB console.") do |o|
+  opts.on("-c", "IRB console.") do |o|
     options[:irb] = o
   end
 end.parse!
 
-KURPEL_DB = "kurpelwoodworks.db"
-
-unless File.exist?(KURPEL_DB)
-  raise StandardError, sprintf("%s don't exists", KURPEL_DB)
-end
-
-require 'sequel'
-require 'logger'
-require 'tempfile'
-
-Sequel::Model.plugin :timestamps, update_on_create: true
-
-DB = Sequel.connect("sqlite://#{KURPEL_DB}")
-DB.loggers << Logger.new($stdout) if options.has_key? :debug
-
+require 'r18n-core'
+require_relative '../db'
 require_relative '../entities/project'
 require_relative '../entities/create_project'
 
-I18n.load_path << Dir[File.expand_path("i18n") + "/*.yml"]
+# Mobillity use I18n, we use R18n so fake it with i18n.yml
+I18n.load_path << "i18n/i18n.yml"
 
 if options.has_key? :new
   I18n.locale = :bg
