@@ -22,6 +22,7 @@ class Kurpelwoodworks < Roda
   route do |r|
     r.assets
     r.i18n_set_locale_from(:session)
+    change_locale
 
     r.root do
       view("home")
@@ -32,13 +33,18 @@ class Kurpelwoodworks < Roda
     end
 
     r.on "portfolio" do
-      # NOTE: pageing will be needed when projects count grown
-      @projects = Project.all
-      view("portfolio")
-    end
+      r.is do
+        r.get do
+          # NOTE: pageing will be needed when projects count grown
+          @projects = Project.all
+          view("portfolio")
+        end
+      end
 
-    r.on "project", String do "work_name"
-      abort "TODO"
+      r.get "project", String do |work_name|
+        @project = Project.find(work_name: work_name)
+        p @project.name
+      end
     end
 
     r.on "contacts" do
@@ -53,11 +59,12 @@ class Kurpelwoodworks < Roda
 
   private
 
-  def change_locale(locale)
-    if Locale::SUPPORTED_LOCALES.include?(locale)
-      session[:locale] = locale
-      I18n.locale = locale
-    end
+  def change_locale(locale = nil)
+    l = session["locale"] ? session["locale"] : :bg
+    l = locale if locale && Locale::SUPPORTED_LOCALES.include?(locale)
+
+    session[:locale] = l
+    I18n.locale = l
   end
 end
 

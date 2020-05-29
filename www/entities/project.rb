@@ -1,4 +1,5 @@
 require 'mobility'
+require_relative './images'
 
 class Project < Sequel::Model
   plugin :mobility
@@ -17,11 +18,19 @@ class Project < Sequel::Model
   end
 
   def started
-    Time.at(self[:started]).strftime("%Y-%m-%d") if self[:started]
+    _preview_date(self[:started])
   end
 
   def completed
-    Time.at(self[:completed]).strftime("%Y-%m-%d") if self[:completed]
+    _preview_date(self[:completed])
+  end
+
+  def images
+    _images
+  end
+
+  def logo_image
+    _images.first
   end
 
   private
@@ -34,5 +43,13 @@ class Project < Sequel::Model
     end
 
     true
+  end
+
+  def _preview_date(date)
+    Time.at(date).strftime("%Y-%m-%d") if date
+  end
+
+  def _images
+    @images ||= (Images.for_project(self.work_name) unless new?) || []
   end
 end
