@@ -6,7 +6,6 @@ require_relative 'entities/project'
 require_relative 'entities/locale'
 
 I18n.load_path << "i18n/i18n.yml"
-I18n.locale = :bg
 
 class Kurpelwoodworks < Roda
   use RodaSessionMiddleware, secret: '1'*64
