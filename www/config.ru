@@ -1,6 +1,6 @@
 require 'roda'
 require 'roda/session_middleware'
-require 'pry'
+require 'pry' unless ENV["production"]
 require_relative 'db'
 require_relative 'entities/project'
 require_relative 'entities/locale'
