@@ -1,12 +1,21 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     ffi (1.12.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
+    mail (2.7.1)
+      mini_mime (>= 0.1.1)
     method_source (1.0.0)
+    mini_mime (1.0.2)
     mobility (0.8.13)
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
@@ -14,6 +23,7 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
     r18n-core (3.2.0)
@@ -37,6 +47,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  letter_opener
+  mail
   mobility
   pry
   puma

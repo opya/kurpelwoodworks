@@ -8,11 +8,13 @@ require_relative 'entities/locale'
 I18n.load_path << "i18n/i18n.yml"
 
 class Kurpelwoodworks < Roda
+  JS_ASSETS = ['navbar.js', 'contact_form.js']
+
   use RodaSessionMiddleware, secret: '1'*64
   plugin :static, ['/assets/webfonts', '/assets/images']
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
-  plugin :assets, css: ['all.scss'], js: ['navbar.js'], path: "./assets"
+  plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
   plugin :i18n, locale: Locale::SUPPORTED_LOCALES, default_locale: :bg
   plugin :common_logger, $stdout
 
@@ -27,17 +29,15 @@ class Kurpelwoodworks < Roda
       view("home")
     end
 
-    r.on "about" do
-      view("about")
+    r.on "kurpel" do
+      view("kurpel")
     end
 
     r.on "portfolio" do
-      r.is do
-        r.get do
-          # NOTE: pageing will be needed when projects count grown
-          @projects = Project.all
-          view("portfolio")
-        end
+      r.get do
+        # NOTE: pageing will be needed when projects count grown
+        @projects = Project.all
+        view("portfolio")
       end
 
       r.get "project", String do |work_name|
@@ -47,7 +47,13 @@ class Kurpelwoodworks < Roda
     end
 
     r.on "contacts" do
-      view("contacts")
+      r.get do
+        view("contacts")
+      end
+
+      r.post do
+        binding.pry
+      end
     end
 
     r.get "locale", String do |locale|
