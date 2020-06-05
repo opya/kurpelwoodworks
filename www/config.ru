@@ -53,6 +53,7 @@ class Kurpelwoodworks < Roda
 
       r.post do
         binding.pry
+        view("contacts")
       end
     end
 

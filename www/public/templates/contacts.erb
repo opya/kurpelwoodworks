@@ -1,10 +1,25 @@
+<form id="contact_form">
 <div class="columns is-centered">
   <div class="column is-4">
 
-    <div class="field">
-      <label class="label">Email</label>
+    <div class="field" id="contact_form_name">
+      <label class="label">Your name</label>
       <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="email" placeholder="Email input">
+        <input class="input is-danger" type="text" placeholder="Your name">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+      <p class="help is-danger">Pleace enter name</p>
+    </div>
+
+    <div class="field" id="contact_form_email">
+      <label class="label">Your email</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-danger" type="email" placeholder="Your email">
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
         </span>
@@ -13,6 +28,20 @@
         </span>
       </div>
       <p class="help is-danger">This email is invalid</p>
+    </div>
+
+    <div class="field" id="contact_form_phone">
+      <label class="label">Your phone</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-danger" type="phone" placeholder="Your phone">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+      <p class="help is-danger">This phone is invalid</p>
     </div>
 
     <div class="field">
@@ -29,3 +58,4 @@
     </div>
   </div>
 </div>
+</form>
