@@ -4,6 +4,7 @@ require 'pry' unless ENV["production"]
 require_relative 'db'
 require_relative 'entities/project'
 require_relative 'entities/locale'
+require_relative 'entities/mmail'
 
 I18n.load_path << "i18n/i18n.yml"
 
@@ -11,12 +12,14 @@ class Kurpelwoodworks < Roda
   JS_ASSETS = ['navbar.js', 'contact_form.js']
 
   use RodaSessionMiddleware, secret: '1'*64
+
   plugin :static, ['/assets/webfonts', '/assets/images']
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
   plugin :i18n, locale: Locale::SUPPORTED_LOCALES, default_locale: :bg
   plugin :common_logger, $stdout
+  plugin :csrf
 
   compile_assets
 
@@ -34,25 +37,35 @@ class Kurpelwoodworks < Roda
     end
 
     r.on "portfolio" do
+      r.get "project", String do |work_name|
+        @project = Project.find(work_name: work_name)
+        
+        p @project.name
+      end
+
       r.get do
         # NOTE: pageing will be needed when projects count grown
         @projects = Project.all
         view("portfolio")
       end
-
-      r.get "project", String do |work_name|
-        @project = Project.find(work_name: work_name)
-        p @project.name
-      end
     end
 
     r.on "contacts" do
-      r.get do
+      r.post do
+        contact = r.params["contact"]
+
+        MMail.new(
+          contact["name"],
+          contact["email"],
+          contact["phone"],
+          contact["message"]
+        ).new_contact_form_message
+
+        @sent = 1
         view("contacts")
       end
 
-      r.post do
-        binding.pry
+      r.get do
         view("contacts")
       end
     end
