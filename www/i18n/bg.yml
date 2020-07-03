@@ -7,3 +7,15 @@ menu:
         bg: Български
         en: Английски
 home_message: тест
+contact_form:
+  name: Име
+  please_enter_name: Моля, въведето име за обратна връзка.
+  email: Email
+  please_enter_email: Моля въведете валиден email.
+  phone: Телефонен номер
+  please_enter_phone: Моля въведете валиден телефонен номер.
+  message: Вашето съобщение
+  please_enter_message: Моля въведете вашето съобщение.
+  message_was_sent: Благодаря за запитването, ще Ви отговорим в най-кратък срок.
+  enter_name_or_phone: Въведете телефон или email за обратна връзка.
+  submit: Изпрати

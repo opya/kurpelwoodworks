@@ -1,75 +1,72 @@
 <form id="contact_form" method="post">
-<%= csrf_tag %>
-<div class="columns is-centered">
-  <div class="column is-4">
-    <% if @sent %>
-      <div class="notification is-success">
-        <button class="delete"></button>
-        Primar lorem ipsum dolor sit amet, consectetur
-        adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Sit amet,
-        consectetur adipiscing elit
+  <%= csrf_tag %>
+  <div class="columns is-centered">
+    <div class="column is-4">
+      <% if @sent %>
+        <div class="notification is-success">
+          <%= t.contact_form.message_was_sent %>
+        </div>
+      <% end %>
+
+      <div class="field" id="contact_form_name">
+        <label class="label"><%= t.contact_form.name %></label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-danger" type="text" placeholder="<%= t.contact_form.name %>" name="contact[name]">
+          <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        <p class="help is-danger"><%= t.contact_form.please_enter_name %></p>
       </div>
-    <% end %>
 
-    <div class="field" id="contact_form_name">
-      <label class="label">Your name</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="text" placeholder="Your name" name="contact[name]">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
+      <div class="notification is-info">
+        <%= t.contact_form.enter_name_or_phone %>
       </div>
-      <p class="help is-danger">Pleace enter name</p>
-    </div>
 
-    <div class="notification is-info">
-      Въведете телефон или email за обратна връзка.
-    </div>
-
-    <div class="field" id="contact_form_email">
-      <label class="label">Your email</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="email" placeholder="Your email" name="contact[email]">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
+      <div class="field" id="contact_form_email">
+        <label class="label"><%= t.contact_form.email %></label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-danger" type="email" placeholder="<%= t.contact_form.email %>" name="contact[email]">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        <p class="help is-danger"><%= t.contact_form.please_enter_email %></p>
       </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
 
-    <div class="field" id="contact_form_phone">
-      <label class="label">Your phone</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="tel" name="contact[phone]" pattern="^([+]?359)|0?(|-| )8[789]\d{1}(|-| )\d{3}(|-| )\d{3}$" placeholder="Your phone">
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
+      <div class="field" id="contact_form_phone">
+        <label class="label"><%= t.contact_form.phone %></label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-danger" type="tel" name="contact[phone]" pattern="^([+]?359)|0?(|-| )8[789]\d{1}(|-| )\d{3}(|-| )\d{3}$" placeholder="<%= t.contact_form.phone %>">
+          <span class="icon is-small is-left">
+            <i class="fas fa-phone"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+        <p class="help is-danger"><%= t.contact_form.please_enter_phone %></p>
       </div>
-      <p class="help is-danger">This phone is invalid</p>
-    </div>
 
-    <div class="field" id="contact_form_message">
-      <label class="label">Message</label>
-      <div class="control">
-        <textarea class="textarea is-danger" placeholder="Textarea" name="contact[message]"></textarea>
+      <div class="field" id="contact_form_message">
+        <label class="label"><%= t.contact_form.message %></label>
+        <div class="control">
+          <textarea class="textarea is-danger" placeholder="<%= t.contact_form.message %>" name="contact[message]"></textarea>
+        </div>
+        <p class="help is-danger"><%= t.contact_form.please_enter_message %></p>
       </div>
-      <p class="help is-danger">This phone is invalid</p>
-    </div>
 
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-link">Submit</button>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link"><%= t.contact_form.submit %></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </form>
