@@ -41,7 +41,7 @@ GEM
       tilt
     sassc (2.4.0)
       ffi (~> 1.9)
-    sequel (5.33.0)
+    sequel (5.34.0)
     sqlite3 (1.4.2)
     tilt (2.0.10)
 
