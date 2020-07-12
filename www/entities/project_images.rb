@@ -34,7 +34,7 @@ class ProjectImage < Sequel::Model
   def generate_thumbnail!
     image = MiniMagick::Image.open("#{BASE_IMAGES_PATH}#{project.work_name}/#{name}")
 
-    self.path = "#{TEMPLATES_PATH}#{project.work_name}/#{File.basename(name)}"
+    self.path = "#{TEMPLATES_PATH}/#{project.work_name}/#{File.basename(name)}"
     self.width = image.width
     self.height = image.height
 
