@@ -2,3 +2,5 @@ app.*.css
 app.*.js
 dev_kurpelwoodworks.db
 www/tmp
+tags
+*.core

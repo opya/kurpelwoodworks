@@ -1,11 +1,13 @@
 require 'mobility'
-require_relative './images'
+require_relative './project_images'
 
 class Project < Sequel::Model
   plugin :mobility
 
   translates :name,         backend: :key_value, type: :string
   translates :description,  backend: :key_value, type: :text
+
+  one_to_many :project_images
 
   def validate
     super
@@ -17,6 +19,11 @@ class Project < Sequel::Model
     errors.add(:completed, 'is invalid date') unless validate_date(self[:completed])
   end
 
+  def before_create
+    load_images!
+    super
+  end
+
   def started
     _preview_date(self[:started])
   end
@@ -26,11 +33,11 @@ class Project < Sequel::Model
   end
 
   def images
-    _images
+    project_images
   end
 
   def logo_image
-    _images.first
+    images.first
   end
 
   private
@@ -49,7 +56,7 @@ class Project < Sequel::Model
     Time.at(date).strftime("%Y-%m-%d") if date
   end
 
-  def _images
-    @images ||= (Images.for_project(self.work_name) unless new?) || []
+  def load_images!
+    ProjectImage.for_project(self)
   end
 end

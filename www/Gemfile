@@ -11,10 +11,12 @@ gem "roda"
 gem "roda-i18n"
 gem "tilt"
 gem "sassc"
+gem "mini_magick"
 gem "sequel"
 gem "sqlite3"
 gem "mobility"
 gem "mail"
 
+#development gems
 gem "letter_opener"
 gem "pry"

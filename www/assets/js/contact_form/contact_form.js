@@ -1,9 +1,7 @@
 var contact_form_id = "contact_form";
 var contact_form = document.getElementById(contact_form_id);
 
-toggle_form_alerts(false);
-
-if(contact_form.addEventListener){
+if(contact_form){
   contact_form.addEventListener("submit", contact_form_callback, false);
 }
 

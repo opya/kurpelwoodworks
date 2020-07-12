@@ -15,6 +15,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     method_source (1.0.0)
+    mini_magick (4.10.1)
     mini_mime (1.0.2)
     mobility (0.8.13)
       i18n (>= 0.6.10, < 2)
@@ -51,6 +52,7 @@ PLATFORMS
 DEPENDENCIES
   letter_opener
   mail
+  mini_magick
   mobility
   pry
   puma

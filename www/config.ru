@@ -9,11 +9,18 @@ require_relative 'entities/mmail'
 I18n.load_path << "i18n/i18n.yml"
 
 class Kurpelwoodworks < Roda
-  JS_ASSETS = ['navbar.js', 'contact_form.js']
+  JS_ASSETS = {
+    layout: 'navbar.js',
+    contact_form: 'contact_form.js',
+    photoswipe: [
+      'photoswipe-ui-default.min.js',
+      'photoswipe.min.js'
+    ]
+  }
 
   use RodaSessionMiddleware, secret: '1'*64
 
-  plugin :static, ['/assets/webfonts', '/assets/images']
+  plugin :static, ['/assets/webfonts', '/assets/images', '/assets/photoswipe']
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
@@ -39,8 +46,9 @@ class Kurpelwoodworks < Roda
     r.on "portfolio" do
       r.get "project", String do |work_name|
         @project = Project.find(work_name: work_name)
+        r.redirect "/portfolio" unless @project
         
-        p @project.name
+        view("portfolio/project")
       end
 
       r.get do
@@ -54,14 +62,15 @@ class Kurpelwoodworks < Roda
       r.post do
         contact = r.params["contact"]
 
-        MMail.new(
+        m = MMail.new(
           contact["name"],
           contact["email"],
           contact["phone"],
           contact["message"]
         ).new_contact_form_message
 
-        @sent = 1
+        @sent = m.valid? ? true : false
+
         view("contacts")
       end
 
