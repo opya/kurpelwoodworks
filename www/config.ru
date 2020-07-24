@@ -18,9 +18,16 @@ class Kurpelwoodworks < Roda
     ]
   }
 
+  STATIC_ASSETS = [
+    '/assets/webfonts',
+    '/assets/images',
+    '/assets/photoswipe',
+    '/assets/mandoc.css'
+  ]
+
   use RodaSessionMiddleware, secret: '1'*64
 
-  plugin :static, ['/assets/webfonts', '/assets/images', '/assets/photoswipe', '/assets/mandoc.css']
+  plugin :static, STATIC_ASSETS
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
