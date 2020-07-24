@@ -32,6 +32,7 @@ require_relative '../entities/create_project'
 
 # Mobillity use I18n, we use R18n so fake it with i18n.yml
 I18n.load_path << "i18n/i18n.yml"
+I18n.locale = :bg
 
 if options.has_key? :new
   I18n.locale = :bg

@@ -1,5 +1,6 @@
 require 'mobility'
-require_relative './project_images'
+require_relative './project/project_images'
+require_relative './project/project_mandoc_template'
 
 class Project < Sequel::Model
   plugin :mobility
