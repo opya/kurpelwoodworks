@@ -2,20 +2,23 @@
 
 <div class="columns is-centered">
   <div class="column is-6">
+
     <div class="column is-12">
       <%= ProjectMandocTemplate.for_project(@project) %>
     </div>
+
     <div class="column is-12">
       <div class="ps_gallery" itemscope itemtype="http://schema.org/ImageGallery">
         <% @project.images.each do |pi| %>
-          <figure class="" style="display: flex; float: left; padding-right: 5px;" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-              <a href="<%= pi.path %>" itemprop="contentUrl" data-size="<%= pi.width %>x<%= pi.height %>">
-                  <img src="<%= pi.thumbnail_path %>" itemprop="thumbnail" />
-              </a>
+          <figure class="is-inline-flex image pb-1 pr-1" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+            <a href="<%= pi.path %>" itemprop="contentUrl" data-size="<%= pi.width %>x<%= pi.height %>">
+              <img width="<%= pi.thumbnail_width %>" height="<%= pi.thumbnail_height %>" src="<%= pi.thumbnail_path %>" itemprop="thumbnail" />
+            </a>
           </figure>
         <% end %>
       </div>
     </div>
+
   </div>
 </div>
 

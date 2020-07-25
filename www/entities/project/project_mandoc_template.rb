@@ -5,7 +5,7 @@ class ProjectMandocTemplate
 .Dd $Mdocdate$
 .Dt PROGNAME section
 .Os
-.Sh Име
+.Sh Продукт
 .Nm %s
 %s
   BODY

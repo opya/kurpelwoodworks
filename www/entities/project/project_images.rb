@@ -16,6 +16,10 @@ class ProjectImage < Sequel::Model
         images = Dir.entries("#{BASE_IMAGES_PATH}#{project.work_name}")
         images.sort!
         images.reject!{ |i| i == '.' || i == '..' || i == 'cache'}
+        existing_images = ProjectImage.select(:name)
+                                      .where(name: images, project: project)
+                                      .select_map(:name)
+        images.reject!{ |i| existing_images.include?(i)}
 
         images.each do |image_name|
           ProjectImage.new(project: project, name: image_name).save
@@ -42,13 +46,18 @@ class ProjectImage < Sequel::Model
       FileUtils.mkdir_p("#{BASE_IMAGES_PATH}#{project.work_name}/#{CASHE_DIR}")
     end
 
-    #NOTE: regenerate thumbnail each time
-    thumbnail = image
-    thumbnail.resize(SCALE_PERCENT)
-    thumbnail.write("#{BASE_IMAGES_PATH}#{project.work_name}/#{CASHE_DIR}#{name}")
+    if self.thumbnail_path.nil? || !cache_thumbnail_exists?
+      thumbnail = image
+      thumbnail.resize(SCALE_PERCENT)
+      thumbnail.write("#{BASE_IMAGES_PATH}#{project.work_name}/#{CASHE_DIR}#{name}")
 
-    self.thumbnail_path = "#{TEMPLATES_PATH}/#{project.work_name}/#{CASHE_DIR}#{name}"
-    self.thumbnail_width = thumbnail.width
-    self.thumbnail_height = thumbnail.height
+      self.thumbnail_path = "#{TEMPLATES_PATH}/#{project.work_name}/#{CASHE_DIR}#{name}"
+      self.thumbnail_width = thumbnail.width
+      self.thumbnail_height = thumbnail.height
+    end
+  end
+
+  def cache_thumbnail_exists?
+    File.exist?("#{BASE_IMAGES_PATH}#{project.work_name}/#{CASHE_DIR}#{name}")
   end
 end
