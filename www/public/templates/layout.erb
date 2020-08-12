@@ -11,7 +11,7 @@
         <nav class="navbar transparent-bg" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-logo navbar-item" href="/">
-              <% if session[:locale] && session[:locale] != "bg" %>
+              <% if session[:locale] != :bg %>
                 <img src="/assets/images/logo_en.png" />
               <% else %>
                 <img src="/assets/images/logo_bg.png" />
