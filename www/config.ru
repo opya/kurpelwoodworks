@@ -74,7 +74,8 @@ class Kurpelwoodworks < Roda
           contact["email"],
           contact["phone"],
           contact["message"]
-        ).new_contact_form_message
+        )
+        m.new_contact_form_message
 
         @sent = m.valid? ? true : false
 

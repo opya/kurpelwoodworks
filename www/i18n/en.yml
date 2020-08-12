@@ -4,7 +4,18 @@ menu:
     contacts: Contacts
     language: Language
     lang:
-        bg: Bulgarian
+        bg: Български
         en: English
 home_message: test
-
+contact_form:
+  name: Name
+  please_enter_name: Please enter a feedback name. 
+  email: Email
+  please_enter_email: Please enter valid email.
+  phone: Phone number
+  please_enter_phone: Please enter valid phone number.
+  message: Inquiry
+  please_enter_message: Please enter inquiry.
+  message_was_sent: Thanks for your inquiry, we will answer you as soon as possible. 
+  enter_name_or_phone: Enter a phone or email for feedback.
+  submit: Send
