@@ -96,7 +96,7 @@ class Kurpelwoodworks < Roda
   private
 
   def change_locale(locale = nil)
-    l = session["locale"] ? session["locale"] : :bg
+    l = session["locale"] ? session["locale"] : "bg"
     l = locale if locale && Locale::SUPPORTED_LOCALES.include?(locale)
 
     session[:locale] = l
