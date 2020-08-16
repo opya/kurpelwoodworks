@@ -11,7 +11,7 @@ if env == 'production'
   environment 'production'
   directory app_dir
   pidfile pid_file 
-  bind 'tcp://0.0.0.0:9292'
+  bind 'tcp://127.0.0.1:9292'
 
   daemonize
 end
