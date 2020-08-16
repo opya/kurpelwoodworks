@@ -6,14 +6,16 @@ env = ENV['RACK_ENV'] || 'development'
 
 if env == 'production'
   app_dir = '/var/www/htdocs/kurpelwoodworks.com/current/www'
-  pid_file = '/var/www/htdocs/kurpelwoodworks.com/shared/tmp/puma.pid'
-  sock_file = '/var/www/htdocs/kurpelwoodworks.com/shared/tmp/puma.sock'
+  shared_dir = '/var/www/htdocs/kurpelwoodworks.com/shared'
+  pid_file = '/tmp/puma.pid'
+  sock_file = '/tmp/puma.sock'
 
   environment 'production'
   directory app_dir
-  pidfile pid_file 
+  pidfile shared_dir + pid_file
   #bind 'tcp://127.0.0.1:9292'
-  bind "unix://#{sock_file}"
+  stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
+  bind "unix://#{shared_dir + sock_file}"
 
   daemonize
 end
