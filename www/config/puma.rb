@@ -6,10 +6,11 @@ env = ENV['RACK_ENV'] || 'development'
 
 if env == 'production'
   app_dir = '/var/www/htdocs/kurpelwoodworks.com/current/www'
+  pid_file = '/var/www/htdocs/kurpelwoodworks.com/shared/tmp/pima.pid'
 
   environment 'production'
   directory app_dir
-  pidfile app_dir + '/../../shared/tmp/puma.pid'
+  pidfile pid_file 
   bind 'tcp://0.0.0.0:9292'
 
   daemonize
