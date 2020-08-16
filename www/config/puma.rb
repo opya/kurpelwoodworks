@@ -9,8 +9,7 @@ if env == 'production'
 
   environment 'production'
   directory app_dir
-  pidfile app_dir + '/tmp/puma.pid'
-  pidfile app_dir + '/tmp/puma.pid'
+  pidfile app_dir + '/../../tmp/puma.pid'
   bind 'tcp://0.0.0.0:9292'
 
   daemonize
