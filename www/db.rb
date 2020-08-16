@@ -1,4 +1,4 @@
-if ENV["production"]
+if ENV["RACK_ENV"] == 'production'
   KURPEL_DB = "kurpelwoodworks.db"
 else
   KURPEL_DB = "dev_kurpelwoodworks.db"
