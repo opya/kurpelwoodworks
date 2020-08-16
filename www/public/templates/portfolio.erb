@@ -1,8 +1,11 @@
 <div class="container">
-  <div class="columns is-mobile is-multiline">
+  <div class="columns is-mobile is-multiline is-centered">
+    <div class="column is-full">
+      <%= pagy_bulma_nav(@pagy) %>
+    </div>
 
     <% @projects.each do |project| %>
-    <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
+    <div class="column is-half-desktop is-half-tablet is-full-mobile">
       <div class="box">
 
         <article class="media">
@@ -43,5 +46,8 @@
     </div>
     <% end %>
 
+    <div class="column is-full">
+      <%= pagy_bulma_nav(@pagy) %>
+    </div>
   </div>
 </div>

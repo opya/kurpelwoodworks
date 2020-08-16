@@ -21,6 +21,7 @@ GEM
       i18n (>= 0.6.10, < 2)
       request_store (~> 1.0)
     nio4r (2.5.2)
+    pagy (3.8.3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -34,7 +35,7 @@ GEM
     rake (13.0.1)
     request_store (1.5.0)
       rack (>= 1.4)
-    roda (3.34.0)
+    roda (3.35.0)
       rack
     roda-i18n (0.4.0)
       r18n-core (~> 3.0)
@@ -54,6 +55,7 @@ DEPENDENCIES
   mail
   mini_magick
   mobility
+  pagy
   pry
   puma
   rack_csrf

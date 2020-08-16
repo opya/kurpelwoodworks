@@ -16,6 +16,7 @@ gem "sequel"
 gem "sqlite3"
 gem "mobility"
 gem "mail"
+gem "pagy"
 
 #development gems
 gem "letter_opener"

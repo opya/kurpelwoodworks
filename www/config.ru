@@ -1,5 +1,7 @@
 require 'roda'
 require 'roda/session_middleware'
+require 'pagy'
+require 'pagy/extras/bulma'
 require 'pry' unless ENV["production"]
 require_relative 'db'
 require_relative 'entities/project'
@@ -9,6 +11,9 @@ require_relative 'entities/mmail'
 I18n.load_path << "i18n/i18n.yml"
 
 class Kurpelwoodworks < Roda
+  include Pagy::Backend
+  include Pagy::Frontend
+
   JS_ASSETS = {
     layout: 'navbar.js',
     contact_form: 'contact_form.js',
@@ -59,8 +64,7 @@ class Kurpelwoodworks < Roda
       end
 
       r.get do
-        # NOTE: pageing will be needed when projects count grown
-        @projects = Project.all
+        @pagy, @projects = pagy(Project)
         view("portfolio")
       end
     end
@@ -101,6 +105,15 @@ class Kurpelwoodworks < Roda
 
     session[:locale] = l
     I18n.locale = l
+    Pagy::I18n.load(locale: l)
+  end
+
+  def pagy_get_vars(collection, vars)
+    {
+      count: collection.count,
+      page: request.params["page"],
+      items: vars[:items] ||  4
+    }
   end
 end
 
