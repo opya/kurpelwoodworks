@@ -17,7 +17,7 @@ if env == 'production'
   bind "tcp://127.0.0.1:9292"
   #bind "unix://#{shared_dir + sock_file}"
 
-  daemonize
+  #daemonize
 end
 
 before_fork do
