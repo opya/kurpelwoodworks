@@ -14,10 +14,10 @@ if env == 'production'
   directory app_dir
   #pidfile shared_dir + pid_file
   stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
-  bind 'tcp://127.0.0.1:9292'
+  bind "tcp://127.0.0.1:9292"
   #bind "unix://#{shared_dir + sock_file}"
 
-  daemonize
+  #daemonize
 end
 
 before_fork do
