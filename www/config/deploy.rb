@@ -22,7 +22,8 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         command %{cd www && bundle install --path=~/.gems}
-        command "RACK_ENV=production bundle exec pumactl restart&"
+        #TODO: make it rc script ..
+        command %{RACK_ENV=production bundle exec pumactl restart}
       end
     end
   end
