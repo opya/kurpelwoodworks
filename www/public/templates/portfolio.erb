@@ -5,7 +5,7 @@
     </div>
 
     <% @projects.each do |project| %>
-    <div class="column is-half-desktop is-half-tablet is-full-mobile">
+    <div class="column is-one-third is-half-tablet is-full-mobile">
       <div class="box">
 
         <article class="media">
@@ -36,9 +36,9 @@
         </article>
         <br />
 
-        <figure class="image is-3by2">
+        <figure class="image">
           <a href="/portfolio/project/<%= project.work_name %>">
-            <img src="<%= project.logo_image.path %>" title="<%= project.name %>">
+            <img src="<%= project.logo_image.thumbnail_path %>" title="<%= project.name %>">
           </a>
         </figure>
 

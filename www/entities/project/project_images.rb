@@ -7,7 +7,8 @@ class ProjectImage < Sequel::Model
   BASE_IMAGES_PATH = "public/assets/images/"
   TEMPLATES_PATH = "/assets/images"
   CASHE_DIR = "cache/"
-  SCALE_PERCENT = "10%"
+  #SCALE_PERCENT = "10%"
+  SCALE_PERCENT = "800x1000"
   THUMBNAIL_PATH = ""
 
   class << self

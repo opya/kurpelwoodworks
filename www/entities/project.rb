@@ -25,6 +25,12 @@ class Project < Sequel::Model
     super
   end
 
+  #TODO: this whould be done with db constraint 
+  def before_destroy
+    self.project_images.map(&:destroy)
+    super
+  end
+
   def started
     _preview_date(self[:started])
   end
