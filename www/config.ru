@@ -36,7 +36,7 @@ class Kurpelwoodworks < Roda
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
-  plugin :i18n, locale: Locale::SUPPORTED_LOCALES, default_locale: :bg
+  plugin :i18n, locale: Locale::SUPPORTED_LOCALES, default_locale: :en
   plugin :common_logger, $stdout
   plugin :csrf
 
@@ -48,7 +48,7 @@ class Kurpelwoodworks < Roda
     change_locale
 
     r.root do
-      view("home")
+      view("home", layout: 'home_layout')
     end
 
     r.on "kurpel" do
@@ -100,7 +100,7 @@ class Kurpelwoodworks < Roda
   private
 
   def change_locale(locale = nil)
-    l = session["locale"] ? session["locale"] : "bg"
+    l = session["locale"] ? session["locale"] : "en"
     l = locale if locale && Locale::SUPPORTED_LOCALES.include?(locale)
 
     session[:locale] = l

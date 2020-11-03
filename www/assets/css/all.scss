@@ -3,3 +3,22 @@
 @import 'flags';
 @import 'photoswipe/photoswipe';
 @import 'photoswipe/default-skin';
+
+.hero.has-background {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    background-size: cover;
+    position: absolute;
+    object-fit: cover;
+    //object-position: center center;
+    object-position: 51.9107% 70.6411%;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-background.is-transparent {
+    opacity: 0.9; 
+}
