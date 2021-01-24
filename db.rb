@@ -1,8 +1,4 @@
-if ENV["RACK_ENV"] == 'production'
-  KURPEL_DB = "kurpelwoodworks.db"
-else
-  KURPEL_DB = "dev_kurpelwoodworks.db"
-end
+KURPEL_DB = "db/kurpelwoodworks.db"
 
 unless File.exist?(KURPEL_DB)
   raise StandardError, sprintf("%s don't exists", KURPEL_DB)
