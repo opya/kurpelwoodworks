@@ -11,8 +11,18 @@ end
 require 'sequel'
 require 'logger'
 require 'tempfile'
+require 'mobility'
 
 Sequel::Model.plugin :timestamps, update_on_create: true
 
 DB = Sequel.connect("sqlite://#{KURPEL_DB}")
 DB.loggers << Logger.new($stdout)
+
+Mobility.configure do
+  plugins do
+    backend :key_value
+    reader
+    writer
+    sequel
+  end
+end

@@ -5,10 +5,10 @@ require_relative './project/project_mandoc_template'
 class Project < Sequel::Model
   plugin :mobility
 
-  translates :name,         backend: :key_value, type: :string
-  translates :description,  backend: :key_value, type: :text
-
   one_to_many :project_images
+
+  translates :name, type: :string
+  translates :description, type: :text
 
   def validate
     super
