@@ -4,11 +4,6 @@ require 'pagy'
 require 'pagy/extras/bulma'
 require 'pry' unless ENV["production"]
 require_relative 'db'
-require_relative 'entities/project'
-require_relative 'entities/locale'
-require_relative 'entities/mmail'
-
-I18n.load_path << "i18n/i18n.yml"
 
 class Kurpelwoodworks < Roda
   include Pagy::Backend
@@ -36,7 +31,6 @@ class Kurpelwoodworks < Roda
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
-  plugin :i18n, locale: Locale::SUPPORTED_LOCALES, default_locale: :en
   plugin :common_logger, $stdout
   plugin :csrf
 
@@ -44,29 +38,14 @@ class Kurpelwoodworks < Roda
 
   route do |r|
     r.assets
-    r.i18n_set_locale_from(:session)
-    change_locale
 
     r.root do
-      view("home", layout: 'home_layout')
+      #view("home", layout: 'home_layout')
+      view("home")
     end
 
     r.on "kurpel" do
       view("kurpel")
-    end
-
-    r.on "portfolio" do
-      r.get "project", String do |work_name|
-        @project = Project.find(work_name: work_name)
-        r.redirect "/portfolio" unless @project
-        
-        view("portfolio/project")
-      end
-
-      r.get do
-        @pagy, @projects = pagy(Project)
-        view("portfolio")
-      end
     end
 
     r.on "contacts" do
@@ -90,23 +69,9 @@ class Kurpelwoodworks < Roda
         view("contacts")
       end
     end
-
-    r.get "locale", String do |locale|
-      change_locale(locale)
-      r.redirect r.referer
-    end
   end
 
   private
-
-  def change_locale(locale = nil)
-    l = session["locale"] ? session["locale"] : "en"
-    l = locale if locale && Locale::SUPPORTED_LOCALES.include?(locale)
-
-    session[:locale] = l
-    I18n.locale = l
-    Pagy::I18n.load(locale: l)
-  end
 
   def pagy_get_vars(collection, vars)
     {

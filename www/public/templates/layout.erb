@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/assets/images/favicon.ico" sizes="32x32">
     <%= assets(:css) %>
   </head>
   <body>
@@ -11,11 +12,14 @@
         <nav class="navbar transparent-bg" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
             <a class="navbar-logo navbar-item" href="/">
+              <img src="/assets/images/logo_bg.png" />
+              <!--
               <% if session[:locale] != "bg" %>
                 <img src="/assets/images/logo_en.png" />
               <% else %>
                 <img src="/assets/images/logo_bg.png" />
               <% end %>
+              -->
             </a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-main">
               <span aria-hidden="true"></span>
@@ -25,26 +29,19 @@
           </div>
           <div class="navbar-menu" id="navbar-main">
             <div class="navbar-start">
-              <a class="navbar-item" href="/portfolio"><%= t.menu.portfolio %></a>
-              <a class="navbar-item" href="/kurpel"><%= t.menu.kurpel %></a>
-              <a class="navbar-item" href="/contacts"><%= t.menu.contacts %></a>
+              <a class="navbar-item" href="/contacts">Контакти</a>
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="#"><%= t.menu.language %></a>
+                <!--
+                <a class="navbar-link" href="#">Език</a>
                 <div class="navbar-dropdown">
-                  <a class="navbar-item" href="/locale/bg"><%= t.menu.lang.bg %>&nbsp;<span class="flag flag-bg"></span></a>
-                  <a class="navbar-item" href="/locale/en"><%= t.menu.lang.en %>&nbsp;<span class="flag flag-gb"></span></a>
+                  <a class="navbar-item" href="/locale/bg">bg&nbsp;<span class="flag flag-bg"></span></a>
+                  <a class="navbar-item" href="/locale/en">en&nbsp;<span class="flag flag-gb"></span></a>
                 </div>
+                -->
               </div>
 
               <a class="navbar-item" href="https://www.facebook.com/kurpelwoodworks/" target="_blank">
                 <i class="fab fa-facebook-f"></i>
-              </a>
-              <a class="navbar-item">
-                <div class="ec-cart-widget"></div>
-                <div>
-                <script data-cfasync="false" type="text/javascript" src="https://app.ecwid.com/script.js?39852269&data_platform=code&data_date=2020-11-03" charset="utf-8"></script>
-                <script type="text/javascript">Ecwid.init();</script>
-                </div> 
               </a>
             </div>
           </div>

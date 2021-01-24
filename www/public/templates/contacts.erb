@@ -4,14 +4,14 @@
     <div class="column is-4">
       <% if @sent %>
         <div class="notification is-success">
-          <%= t.contact_form.message_was_sent %>
+          Благодаря, съобщението е изпратено
         </div>
       <% end %>
 
       <div class="field" id="contact_form_name">
-        <label class="label"><%= t.contact_form.name %></label>
+        <label class="label">Име</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-danger" type="text" placeholder="<%= t.contact_form.name %>" name="contact[name]">
+          <input class="input is-danger" type="text" placeholder="Име" name="contact[name]">
           <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
           </span>
@@ -19,17 +19,17 @@
             <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
-        <p class="help is-danger"><%= t.contact_form.please_enter_name %></p>
+        <p class="help is-danger">Моля въвдете име</p>
       </div>
 
       <div class="notification is-info">
-        <%= t.contact_form.enter_name_or_phone %>
+        Въведете име или телефон
       </div>
 
       <div class="field" id="contact_form_email">
-        <label class="label"><%= t.contact_form.email %></label>
+        <label class="label">Email</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-danger" type="email" placeholder="<%= t.contact_form.email %>" name="contact[email]">
+          <input class="input is-danger" type="email" placeholder="Email" name="contact[email]">
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -37,13 +37,13 @@
             <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
-        <p class="help is-danger"><%= t.contact_form.please_enter_email %></p>
+        <p class="help is-danger">Моле въведете email</p>
       </div>
 
       <div class="field" id="contact_form_phone">
-        <label class="label"><%= t.contact_form.phone %></label>
+        <label class="label">Телефон</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-danger" type="tel" name="contact[phone]" pattern="^([+]?359)|0?(|-| )8[789]\d{1}(|-| )\d{3}(|-| )\d{3}$" placeholder="<%= t.contact_form.phone %>">
+          <input class="input is-danger" type="tel" name="contact[phone]" pattern="^([+]?359)|0?(|-| )8[789]\d{1}(|-| )\d{3}(|-| )\d{3}$" placeholder="Телефон">
           <span class="icon is-small is-left">
             <i class="fas fa-phone"></i>
           </span>
@@ -51,20 +51,20 @@
             <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
-        <p class="help is-danger"><%= t.contact_form.please_enter_phone %></p>
+        <p class="help is-danger">Моля въведете телефон</p>
       </div>
 
       <div class="field" id="contact_form_message">
-        <label class="label"><%= t.contact_form.message %></label>
+        <label class="label">Съобщение</label>
         <div class="control">
-          <textarea class="textarea is-danger" placeholder="<%= t.contact_form.message %>" name="contact[message]"></textarea>
+          <textarea class="textarea is-danger" placeholder="Съобщение" name="contact[message]"></textarea>
         </div>
-        <p class="help is-danger"><%= t.contact_form.please_enter_message %></p>
+        <p class="help is-danger">Моля въведете съобщени</p>
       </div>
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link"><%= t.contact_form.submit %></button>
+          <button class="button is-link">Съобщение</button>
         </div>
       </div>
     </div>
