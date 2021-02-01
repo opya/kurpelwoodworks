@@ -1,0 +1,15 @@
+<div class="columns is-centered">
+  <div class="column is-4">
+    <% if @new_record %>
+      <div class="notification is-success">
+        Записаът е добавен успешно.
+      </div>
+    <% end %>
+
+    <% form(@record, {}, {config: :bulma, errors: @errors}) do |f| %>
+      <%= f.input(:name) %>
+      <%= f.input(:description, type: :textarea, rows: 5, cols: 50) %>
+      <%= f.button(value: 'Запиши', class: 'is-success') %>
+    <% end %>
+  </div>
+</div>

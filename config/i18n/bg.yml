@@ -1,0 +1,5 @@
+bg:
+  models:
+    records:
+      name: Име
+      description: Описание
