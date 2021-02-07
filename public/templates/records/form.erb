@@ -8,8 +8,24 @@
 
     <% form(@record, {}, {config: :bulma, errors: @errors}) do |f| %>
       <%= f.input(:name) %>
+      <%= f.input(:tags, type: :text, class: ["tags"]) %>
+
+      <div class="field">
+        <div class="control">
+          <span class="tag is-info">
+            дърводелец
+            <button class="delete is-small"></button>
+          </span>
+        </div>
+      </div>
+
       <%= f.input(:description, type: :textarea, rows: 5, cols: 50) %>
+
       <%= f.button(value: 'Запиши', class: 'is-success') %>
     <% end %>
-  </div>
 </div>
+
+<%= assets([:js, :record, :tags]) %>
+
+<script type="text/javascript">
+</script>

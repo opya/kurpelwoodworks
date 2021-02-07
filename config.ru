@@ -15,8 +15,11 @@ class Kurpelwoodworks < Roda
   include Pagy::Frontend
 
   JS_ASSETS = {
-    layout: 'navbar.js',
+    navbar: 'navbar.js',
     contact_form: 'contact_form.js',
+    record: {
+      tags: 'tags.js'
+    },
     photoswipe: [
       'photoswipe-ui-default.min.js',
       'photoswipe.min.js'

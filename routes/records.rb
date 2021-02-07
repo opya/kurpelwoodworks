@@ -35,6 +35,16 @@ class Kurpelwoodworks
         end
       end
     end
+
+    r.is 'search' do
+      r.get do
+        view("records/search_form")
+      end
+
+      r.post String do |search_term|
+        binding.pry
+      end
+    end
   end
 
   private
