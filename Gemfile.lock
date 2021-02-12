@@ -7,7 +7,7 @@ GEM
     concurrent-ruby (1.1.8)
     ffi (1.14.2)
     forme (1.11.0)
-    i18n (1.8.8)
+    i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     launchy (2.5.0)
       addressable (~> 2.7)
