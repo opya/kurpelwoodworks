@@ -9,14 +9,15 @@ class Kurpelwoodworks
       end
 
       r.post do
-        @record = Record.new
-        save_record(r)
+        binding.pry
+        #@record = Record.new
+        #save_record(r)
 
-        if @new_record
-          r.redirect "/records/#{@record.id}"
-        else
-          view("records/form")
-        end
+        #if @new_record
+        #  r.redirect "/records/#{@record.id}"
+        #else
+        #  view("records/form")
+        #end
       end
     end
 

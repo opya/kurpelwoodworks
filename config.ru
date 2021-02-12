@@ -49,7 +49,8 @@ class Kurpelwoodworks < Roda
 
     r.root do
       #view("home", layout: 'home_layout')
-      view("home")
+      #view("home")
+      r.redirect "records"
     end
   end
 

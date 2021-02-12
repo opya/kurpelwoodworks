@@ -8,13 +8,13 @@
 
     <% form(@record, {}, {config: :bulma, errors: @errors}) do |f| %>
       <%= f.input(:name) %>
-      <%= f.input(:tags, type: :text, class: ["tags"]) %>
+      <%= f.input(:tags, type: :text, id: "record_tags_input") %>
 
       <div class="field">
-        <div class="control">
+        <div class="control" id="record_tags">
           <span class="tag is-info">
             дърводелец
-            <button class="delete is-small"></button>
+            <button class="delete is-small delete_record_tag"></button>
           </span>
         </div>
       </div>

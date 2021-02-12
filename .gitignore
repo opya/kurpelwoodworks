@@ -1,5 +1,5 @@
 public/assets/app.*
 dev_kurpelwoodworks.db
 www/tmp
-tags
+/tags
 *.core
