@@ -1,5 +1,4 @@
-public/assets/app.*.css
-public/assets/app.*.js
+public/assets/app.*
 dev_kurpelwoodworks.db
 www/tmp
 tags
