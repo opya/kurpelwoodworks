@@ -35,8 +35,11 @@ class Kurpelwoodworks < Roda
   plugin :render, esacape: true, views: "./public/templates",
           template_opts: { default_encoding: 'UTF-8' }
   plugin :assets, css: ['all.scss'], js: JS_ASSETS, path: "./assets"
-  plugin :common_logger, $stdout
+  #plugin :common_logger, $stdout
+  plugin :enhanced_logger, trace_missing: true
+  plugin :route_list
   plugin :forme_route_csrf
+  plugin :forme_set
 
   compile_assets
 
@@ -47,10 +50,11 @@ class Kurpelwoodworks < Roda
     r.assets
     r.hash_routes
 
+    # route: /
     r.root do
       #view("home", layout: 'home_layout')
       #view("home")
-      r.redirect "records"
+      r.redirect "records/index"
     end
   end
 
@@ -60,7 +64,7 @@ class Kurpelwoodworks < Roda
     {
       count: collection.count,
       page: request.params["page"],
-      items: vars[:items] ||  4
+      items: vars[:items] || 4 
     }
   end
 end

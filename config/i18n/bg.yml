@@ -3,3 +3,4 @@ bg:
     records:
       name: Име
       description: Описание
+      tags: Taгове

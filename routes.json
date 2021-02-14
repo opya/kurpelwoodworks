@@ -1,0 +1,36 @@
+[
+  {
+    "path": "/"
+  },
+  {
+    "path": "/records",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "name": "records_create"
+  },
+  {
+    "path": "/records/:record_id",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "name": "records_view_edit"
+  },
+  {
+    "path": "/records/search",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "name": "records_search"
+  },
+  {
+    "path": "/records/index",
+    "methods": [
+      "GET"
+    ],
+    "name": "records_index"
+  }
+]

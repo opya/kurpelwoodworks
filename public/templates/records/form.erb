@@ -7,19 +7,24 @@
     <% end %>
 
     <% form(@record, {}, {config: :bulma, errors: @errors}) do |f| %>
-      <%= f.input(:name) %>
-      <%= f.input(:tags, type: :text, id: "record_tags_input") %>
+      <%= f.input(:name, placeholder: "Име на записа") %>
+      <%= f.input(:tags, type: :text, placeholder: "Изберете име на таг-а и добавете с enter", value: "") %>
+
+      <input id="hidden_record_tags" type="hidden" name="record[_tags]" value="<%= @hidden_record_tags %>"/>
 
       <div class="field">
-        <div class="control" id="record_tags">
-          <span class="tag is-info">
-            дърводелец
-            <button class="delete is-small delete_record_tag"></button>
-          </span>
+        <div class="control" id="record_tags_group">
+          <% @record_tags.each do |tag| %>
+            <span class="tag is-info">
+              <%= tag %>
+              <button class="delete is-small delete_record_tag"></button>
+            </span>
+
+          <% end %>
         </div>
       </div>
 
-      <%= f.input(:description, type: :textarea, rows: 5, cols: 50) %>
+      <%= f.input(:description, type: :textarea, rows: 5, cols: 50, placeholder: "Описание на записа") %>
 
       <%= f.button(value: 'Запиши', class: 'is-success') %>
     <% end %>

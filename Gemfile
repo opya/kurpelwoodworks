@@ -18,6 +18,8 @@ gem "mail"
 gem "pagy"
 gem "mina"
 gem "i18n"
+gem "roda-enhanced_logger"
+gem "roda-route_list"
 
 #development gems
 gem "letter_opener"
