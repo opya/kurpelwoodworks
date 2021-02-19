@@ -17,7 +17,7 @@ class Kurpelwoodworks
         if @new_record
           r.redirect "/records/#{@record.id}"
         else
-          r.redirect "/records"
+          view("records/form")
         end
       end
     end

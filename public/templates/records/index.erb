@@ -1,12 +1,22 @@
 <div class="columns is-centered">
   <div class="column is-4">
+    <a class="button is-primary" href="<%= listed_route(:records_create)%>">нов запис</a><br />
+  </div>
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-6">
     <% @records.each do |record| %>
       <%= record.name %>
       <a href="<%= listed_route(:records_view_edit, record_id: record.id) %>">редактирай</a>
-      <a href="<%= listed_route(:records_create)%>">нов запис</a>
       <br />
     <% end %>
 
+  </div>
+</div>
+
+<div class="columns is-centered">
+  <div class="column is-6">
     <%= pagy_bulma_nav(@pagy) %>
   </div>
 </div>
