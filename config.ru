@@ -4,6 +4,7 @@ require 'i18n'
 require 'pagy'
 require 'pagy/extras/bulma'
 require 'pry' unless ENV["production"]
+require_relative './lib/roda/plugins/cors'
 require_relative 'db'
 require_relative 'config/forme_bulma'
 
@@ -40,6 +41,9 @@ class Kurpelwoodworks < Roda
   plugin :route_list
   plugin :forme_route_csrf
   plugin :forme_set
+  plugin :json
+  plugin :cors
+  #plugin :route_csrf
 
   compile_assets
 

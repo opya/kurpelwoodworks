@@ -55,7 +55,8 @@ class Kurpelwoodworks
     r.on 'index' do
       r.get do
         @pagy, @records = pagy(Record)
-        view("records/index")
+        #view("records/index")
+        { records: @records.map(&:values) }
       end
     end
   end

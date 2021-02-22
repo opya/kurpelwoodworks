@@ -2,20 +2,28 @@ require_relative '../entities/mmail'
 
 class Kurpelwoodworks
   hash_branch 'contacts' do |r|
+    check_csrf!
+
     r.post do
-      contact = r.params["contact"]
+      sent = false
 
-      m = MMail.new(
-        contact["name"],
-        contact["email"],
-        contact["phone"],
-        contact["message"]
-      )
-      m.new_contact_form_message
+      if r.params.key? "contact"
+        contact = r.params["contact"]
 
-      @sent = m.valid? ? true : false
+        m = MMail.new(
+          contact["name"],
+          contact["email"],
+          contact["phone"],
+          contact["message"]
+        )
+        m.new_contact_form_message
 
-      view("contacts")
+        sent = m.valid? ? true : false
+        #@sent = m.valid? ? true : false
+        #view("contacts")
+      end
+
+      { mail: {sent: sent } }
     end
 
     r.get do
