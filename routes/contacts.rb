@@ -4,6 +4,7 @@ class Kurpelwoodworks
   hash_branch 'contacts' do |r|
     check_csrf!
 
+    # route[contacts_create]: POST /contacts
     r.post do
       sent = false
 
@@ -26,6 +27,7 @@ class Kurpelwoodworks
       { mail: {sent: sent } }
     end
 
+    # route[contacts_index]: GET /contacts
     r.get do
       view("contacts")
     end

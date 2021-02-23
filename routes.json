@@ -3,6 +3,20 @@
     "path": "/"
   },
   {
+    "path": "/contacts",
+    "methods": [
+      "POST"
+    ],
+    "name": "contacts_create"
+  },
+  {
+    "path": "/contacts",
+    "methods": [
+      "GET"
+    ],
+    "name": "contacts_index"
+  },
+  {
     "path": "/records",
     "methods": [
       "GET",
