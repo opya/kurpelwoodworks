@@ -3,8 +3,8 @@ require 'roda'
 class Roda
   module RodaPlugins
     module Cors
-      def self.configure(app, allowed_origins: nil)
-        app._cors_allowed_origins = allowed_origins
+      def self.configure(app, opts = {})
+        app._cors_allowed_origins = opts[:allowed_origins] if opts[:allowed_origins]
       end
 
       module ClassMethods

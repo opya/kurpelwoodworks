@@ -3,9 +3,9 @@ require 'roda/session_middleware'
 require 'i18n'
 require 'pagy'
 require 'pagy/extras/metadata'
+require 'pry' unless ENV["production"]
 require_relative './lib/roda/plugins/cors'
 require_relative './config/db'
-require 'pry' unless ENV["production"]
 
 I18n.load_path << Dir[File.expand_path("./config/i18n") + "/*.yml"]
 I18n.default_locale = :bg
@@ -19,6 +19,7 @@ class Kurpelwoodworks < Roda
   plugin :enhanced_logger, trace_missing: true
   plugin :route_list
   plugin :json
+  #plugin :cors, allowed_origins: ['https://kurpelwoodworks.com/']
   plugin :cors
   #plugin :route_csrf
 
