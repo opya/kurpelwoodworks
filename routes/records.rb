@@ -1,4 +1,5 @@
 require_relative '../entities/record'
+require_relative '../presenters/records_presenter'
 
 class Kurpelwoodworks
   hash_branch 'records' do |r|
@@ -54,9 +55,8 @@ class Kurpelwoodworks
     # route[records_index]: GET /records/index
     r.on 'index' do
       r.get do
-        @pagy, @records = pagy(Record)
-        #view("records/index")
-        { records: @records.map(&:values) }
+        pagy, records = pagy(Record)
+        { data: RecordsPresenter.call(records), pagy: pagy_metadata(pagy) }
       end
     end
   end
