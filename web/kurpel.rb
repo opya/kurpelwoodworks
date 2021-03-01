@@ -20,7 +20,7 @@ module Kurpelwoodworks
     plugin :cors
 
     require 'web/routes/contacts'
-    require 'web/routes/records'
+    require 'web/routes/notes'
 
     route do |r|
       r.hash_routes

@@ -9,7 +9,7 @@ module Kurpelwoodworks
   class Router
     include Pagy::Backend
 
-    hash_branch 'records' do |r|
+    hash_branch 'notes' do |r|
 
       # route[records_create]: GET|POST /records
       r.is do
