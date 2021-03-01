@@ -1,0 +1,13 @@
+en:
+  note:
+    errors:
+      rules:
+        name:
+          missing: "Name can't be blank"
+          too_short: Името на записа трябва да е не по-малко от 10 символа
+          too_long: Името на записа трябва да е по-късо от 150 символа
+          filled?: "Name can't be blank"
+        description:
+          missing: "Description can't be blank"
+          too_short: Описанието на записа трябва да е не по-малко от 10 символа
+          filled?: "Description can't be blank"

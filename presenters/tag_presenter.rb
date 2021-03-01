@@ -1,9 +1,11 @@
-require_relative './presenter.rb'
+require 'lib/presenter'
 
-class TagPresenter < Presenter
-  def call
-    {
-      name: @object.name
-    }
+module Kurpelwoodworks
+  class TagPresenter < Presenter
+    def call
+      {
+        name: @object.name
+      }
+    end
   end
 end

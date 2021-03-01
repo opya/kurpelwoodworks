@@ -16,6 +16,7 @@ gem "mina"
 gem "i18n"
 gem "roda-enhanced_logger"
 gem "roda-route_list"
+gem "dry-validation"
 
 #development gems
 gem "letter_opener"
