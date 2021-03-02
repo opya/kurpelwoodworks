@@ -22,8 +22,8 @@ module Kurpelwoodworks
 
     def perform(page)
       repo = @repository.build
-      pagy = Pagy.new({count: @repo.count, page: page, items: NOTES_PER_PAGE})
-      data = @repo.paginete(offset: pagy.offset, limit: NOTES_PER_PAGE)
+      pagy = Pagy.new({count: repo.count, page: page, items: NOTES_PER_PAGE})
+      data = repo.paginete(offset: pagy.offset, limit: NOTES_PER_PAGE)
 
       result.success(notes: @presenter.call(data), paginator: pagy)
     end
