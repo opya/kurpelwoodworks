@@ -1,19 +1,22 @@
 require 'pagy'
 require 'pagy/extras/metadata'
-require 'actions/records/create_note_action'
-require 'actions/records/update_note_action'
-require 'actions/records/list_notes_action'
-require 'actions/records/show_note_action'
 
 module Kurpelwoodworks
   class Router
+    include Import[
+      list_action: 'notes.list_notes_action',
+      show_action: 'notes.show_note_action',
+      create_action: 'notes.create_note_action',
+      update_action: 'notes.update_note_action'
+    ]
+
     include Pagy::Backend
 
     hash_branch 'notes' do |r|
       # route[records_create]: GET|POST /records
       r.is do
         r.get do
-          data = ListNotesAction.build.perform(request.params["page"]).to_h
+          data = list_action.perform(request.params["page"]).to_h
           data[:paginator] = pagy_metadata(data[:paginator])
           data
         end
@@ -22,7 +25,7 @@ module Kurpelwoodworks
           name = r.params["name"]
           description = r.params["description"]
 
-          CreateNoteAction.build.perform(name, description).to_h
+          create_action.perform(name, description).to_h
         end
       end
 
@@ -30,14 +33,14 @@ module Kurpelwoodworks
       r.on Integer do |id|
         r.is do
           r.get do
-            ShowNoteAction.build.perform(id).to_h
+            show_action.perform(id).to_h
           end
 
           r.post do
             name = r.params["name"]
             description = r.params["description"]
 
-            UpdateNoteAction.build.perform(id, name, description).to_h
+            update_action.perform(id, name, description).to_h
           end
         end
       end

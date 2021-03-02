@@ -16,6 +16,7 @@ gem "pagy"
 gem "mina"
 gem "i18n"
 gem "dry-validation"
+gem "dry-system"
 
 #development gems
 gem "letter_opener"

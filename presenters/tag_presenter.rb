@@ -1,11 +1,9 @@
 require 'lib/presenter'
 
-module Kurpelwoodworks
-  class TagPresenter < Presenter
-    def call
-      {
-        name: @object.name
-      }
-    end
+class TagPresenter
+  def call(object)
+    {
+      name: object.name
+    }
   end
 end
