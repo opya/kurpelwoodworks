@@ -12,18 +12,20 @@ module Kurpelwoodworks
     result :notes, :paginator
 
     def self.build
-      new(repository: NoteRepository.build)
+      new(repository: NoteRepository, presenter: NotesPresenter)
     end
 
-    def initialize(repository:)
+    def initialize(repository:, presenter:)
       @repository = repository
+      @presenter = presenter
     end
 
     def perform(page)
-      pagy = Pagy.new({count: @repository.count, page: page, items: NOTES_PER_PAGE})
-      data = @repository.paginete(offset: pagy.offset, limit: NOTES_PER_PAGE)
+      repo = @repository.build
+      pagy = Pagy.new({count: @repo.count, page: page, items: NOTES_PER_PAGE})
+      data = @repo.paginete(offset: pagy.offset, limit: NOTES_PER_PAGE)
 
-      result.success(notes: NotesPresenter.call(data), paginator: pagy)
+      result.success(notes: @presenter.call(data), paginator: pagy)
     end
   end
 end
