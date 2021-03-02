@@ -3,14 +3,23 @@ require 'models/note_model'
 
 module Kurpelwoodworks
   class NoteRepository
+    def self.build
+      new(record: NoteRecord, model: NoteModel)
+    end
+
+    def initialize(record:, model:)
+      @record = record
+      @model = model
+    end
+
     def find(id:)
-      note = NoteRecord.find(id: id) 
+      note = @record.find(id: id) 
       to_model(note) if note
     end
 
     def create!(name:, description:)
       to_model(
-        NoteRecord.new(
+        @record.new(
           name: name,
           description: description
         ).save
@@ -18,7 +27,7 @@ module Kurpelwoodworks
     end
 
     def update!(id:, input:)
-      note = NoteRecord.find(id: id)
+      note = @record.find(id: id)
 
       if note
         note.update(input)
@@ -27,7 +36,7 @@ module Kurpelwoodworks
     end
 
     def paginete(offset:, limit:)
-      notes = NoteRecord.offset(offset).limit(limit).map do |note|
+      notes = @record.offset(offset).limit(limit).map do |note|
         to_model(note.values)
       end
 
@@ -35,14 +44,13 @@ module Kurpelwoodworks
     end
 
     def count
-      NoteRecord.count
+      @record.count
     end
-
 
     private
 
     def to_model(attributes)
-      NoteModel.new(**attributes)
+      @model.new(**attributes)
     end
   end
 end

@@ -10,11 +10,10 @@ module Kurpelwoodworks
     include Pagy::Backend
 
     hash_branch 'notes' do |r|
-
       # route[records_create]: GET|POST /records
       r.is do
         r.get do
-          data = ListNotesAction.new.perform(request.params["page"]).to_h
+          data = ListNotesAction.build.perform(request.params["page"]).to_h
           data[:paginator] = pagy_metadata(data[:paginator])
           data
         end
@@ -23,7 +22,7 @@ module Kurpelwoodworks
           name = r.params["name"]
           description = r.params["description"]
 
-          CreateNoteAction.new.perform(name, description).to_h
+          CreateNoteAction.build.perform(name, description).to_h
         end
       end
 
@@ -31,14 +30,14 @@ module Kurpelwoodworks
       r.on Integer do |id|
         r.is do
           r.get do
-            ShowNoteAction.new.perform(id).to_h
+            ShowNoteAction.build.perform(id).to_h
           end
 
           r.post do
             name = r.params["name"]
             description = r.params["description"]
 
-            UpdateNoteAction.new.perform(id, name, description).to_h
+            UpdateNoteAction.build.perform(id, name, description).to_h
           end
         end
       end

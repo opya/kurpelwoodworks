@@ -1,5 +1,4 @@
-$:.unshift(File.expand_path("../", __FILE__))
-
+require_relative 'init'
 require 'web/kurpel'
 
 run Kurpelwoodworks::Router.freeze.app

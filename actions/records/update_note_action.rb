@@ -10,14 +10,24 @@ module Kurpelwoodworks
 
     result :note
 
+    def self.build
+      new(repository: NoteRepository, presenter: NotePresenter, validator: NoteValidation)
+    end
+
+    def initialize(repository:, presenter:, validator:)
+      @repository = repository
+      @presenter = presenter
+      @validator = validator
+    end
+
     def perform(id, name, description)
-      validator = NoteValidation.new.call(name: name, description: description)
+      validator = @validator.new.call(name: name, description: description)
 
       if validator.success?
-        note = NoteRepository.new.update!(id: id, input: validator.values.data)
+        note = @repository.build.update!(id: id, input: validator.values.data)
 
         if note
-          result.success(note: NotePresenter.call(note))
+          result.success(note: @presenter.call(note))
         else
           result.failure(tr('note.generic.not_found'))
         end

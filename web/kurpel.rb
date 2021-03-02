@@ -1,12 +1,6 @@
 require 'roda'
 require 'roda/session_middleware'
-require 'i18n'
-require 'pry' unless ENV["production"]
 require 'lib/roda/plugins/cors'
-require 'config/db'
-
-I18n.load_path << Dir.glob("./config/i18n/**/*.yml")
-I18n.default_locale = :bg
 
 module Kurpelwoodworks
   class Router < Roda
