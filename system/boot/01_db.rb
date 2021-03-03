@@ -6,7 +6,6 @@ Kurpelwoodworks::Application.boot(:db) do
 
     require 'sequel'
     require 'logger'
-    require 'tempfile'
 
     Sequel::Model.plugin :timestamps, update_on_create: true
     Sequel::Model.plugin :validation_helpers
