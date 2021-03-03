@@ -21,7 +21,7 @@ if env == 'production'
 end
 
 before_fork do
-  DB.disconnect
+  Kurpelwoodworks::Application["db.connection"].disconnect
 end
 
 preload_app!

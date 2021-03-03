@@ -17,7 +17,13 @@ gem "mina"
 gem "i18n"
 gem "dry-validation"
 gem "dry-system"
+gem "dotenv"
 
-#development gems
-gem "letter_opener"
-gem "pry"
+group :development do
+  gem "letter_opener"
+  gem "pry"
+end
+
+group :test do
+  gem "minitest"
+end

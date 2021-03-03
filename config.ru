@@ -1,4 +1,6 @@
-require_relative 'init'
-require_relative 'web/router'
+require_relative 'config/application'
+Kurpelwoodworks::Application.finalize!
 
-run Router.freeze.app
+require 'kurpelwoodworks/web/router'
+
+run Kurpelwoodworks::Router.freeze.app
