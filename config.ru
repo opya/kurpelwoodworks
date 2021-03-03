@@ -1,4 +1,4 @@
 require_relative 'init'
-require 'web/kurpel'
+require_relative 'web/router'
 
-run Kurpelwoodworks::Router.freeze.app
+run Router.freeze.app

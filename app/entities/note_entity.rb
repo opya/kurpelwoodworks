@@ -1,4 +1,4 @@
-class NoteModel
+class NoteEntity
   attr_reader :id, :name, :description, :tags
 
   def initialize(id:, name:, description:, tags: [])
