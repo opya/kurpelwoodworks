@@ -7,28 +7,20 @@ module Kurpelwoodworks
 
       def find(id:)
         note = model.find(id: id) 
-        to_entity(note) if note
+        note ? to_entity(note) : nil
       end
 
-      def create!(name:, description:)
-        to_entity(
-          model.new(
-            name: name,
-            description: description
-          ).save
-        )
+      def create!(input:)
+        note = model.new(input).save
+        note ? to_entity(note) : nil
       end
 
       def update!(id:, input:)
         note = model.find(id: id)
-
-        if note
-          note.update(input)
-          to_entity(note)
-        end
+        note ? to_entity(note.update(input)) : nil
       end
 
-      def paginete(offset:, limit:)
+      def paginate(offset:, limit:)
         notes = model.offset(offset).limit(limit).map do |note|
           to_entity(note)
         end
@@ -40,14 +32,14 @@ module Kurpelwoodworks
         model.count
       end
 
+      private
+
       def model
         note_model.model
       end
 
-      private
-
       def to_entity(attributes)
-        NoteEntity.new(**attributes)
+        Entities::NoteEntity.new(**attributes)
       end
     end
   end

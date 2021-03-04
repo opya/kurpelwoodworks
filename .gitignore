@@ -3,3 +3,5 @@ dev_kurpelwoodworks.db
 www/tmp
 /tags
 *.core
+/coverage
+/deep_cover

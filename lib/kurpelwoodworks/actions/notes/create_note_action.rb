@@ -12,13 +12,11 @@ module Kurpelwoodworks
 
         result :note
 
-        def perform(name, description)
-          validator = validation.call(
-            name: name,
-            description: description)
+        def perform(input)
+          validator = validation.call(input)
 
           if validator.success?
-            note = repository.create!(name: name, description: description)
+            note = repository.create!(input: validator.to_h)
             result.success(note: presenter.call(note))
           else
             result.failure(validator.errors.to_h)

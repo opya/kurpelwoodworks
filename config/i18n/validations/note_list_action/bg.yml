@@ -1,0 +1,9 @@
+bg:
+  note_list_action:
+    errors:
+      rules:
+        page:
+          missing: Невалидна страница
+          filled?: Невалидна страница
+          key?: Невалидна страница
+          int?: Невалидна страница

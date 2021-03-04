@@ -12,7 +12,7 @@ Kurpelwoodworks::Application.boot(:db) do
     Sequel::Model.plugin :prepared_statements
 
     connection = Sequel.connect("sqlite://#{ENV["KURPEL_DB"]}")
-    connection.loggers << Logger.new($stdout)
+    connection.loggers << Logger.new($stdout) unless ENV["APP_ENV"].eql? 'test' 
 
     register("db.connection", connection)
   end

@@ -1,9 +1,11 @@
 require 'kurpelwoodworks/lib/action'
+require 'kurpelwoodworks/lib/translate'
 
 module Kurpelwoodworks
   module Actions
     module Notes
       class ShowNoteAction < Action
+        include Translate
         include Import[
           repository: "repositories.note_repository",
           presenter: "presenters.note_presenter"

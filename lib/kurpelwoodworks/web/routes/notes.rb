@@ -22,10 +22,7 @@ module Kurpelwoodworks
         end
 
         r.post do
-          name = r.params["name"]
-          description = r.params["description"]
-
-          create_action.perform(name, description).to_h
+          create_action.perform(r.params).to_h
         end
       end
 

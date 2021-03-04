@@ -25,6 +25,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
-  gem 'database_cleaner-sequel'
+  gem "rspec"
+  gem "database_cleaner-sequel"
+  gem "deep-cover"
 end

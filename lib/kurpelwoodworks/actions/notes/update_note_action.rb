@@ -15,18 +15,18 @@ module Kurpelwoodworks
 
         result :note
 
-        def perform(id, name, description)
-          validator = validation.call(name: name, description: description)
+        def perform(input)
+          validator = validation.call(input)
 
           if validator.success?
-            note = repository.update!(id: id, input: validator.values.data)
+            note = repository.update!(validator.to_h)
 
             if note
               result.success(note: presenter.call(note))
             else
               result.failure(tr('note.generic.not_found'))
             end
-          elsif validator.failure?
+          else
             result.failure(validator.errors.to_h)
           end
         end
