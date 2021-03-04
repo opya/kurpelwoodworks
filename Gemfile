@@ -25,5 +25,6 @@ group :development do
 end
 
 group :test do
-  gem "minitest"
+  gem 'rspec'
+  gem 'database_cleaner-sequel'
 end
