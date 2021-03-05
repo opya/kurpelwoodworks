@@ -17,6 +17,7 @@ gem "mina"
 gem "i18n"
 gem "dry-validation"
 gem "dry-system"
+gem "dry-monads"
 gem "dotenv"
 
 group :development do
@@ -28,4 +29,5 @@ group :test do
   gem "rspec"
   gem "database_cleaner-sequel"
   gem "deep-cover"
+  gem "rack-test"
 end

@@ -16,13 +16,27 @@ module Kurpelwoodworks
       # route[records_create]: GET|POST /records
       r.is do
         r.get do
-          data = list_action.perform(request.params["page"]).to_h
-          data[:paginator] = pagy_metadata(data[:paginator])
-          data
+          action = list_action.perform(r.params["page"] || 1)
+
+          if action.success?
+            data = action.value!
+            data[:paginator] = pagy_metadata(data[:paginator])
+            data
+          else
+            response.status = 400
+            action.failure
+          end
         end
 
         r.post do
-          create_action.perform(r.params).to_h
+          action = create_action.perform(r.params)
+
+          if action.success?
+            action.value!
+          else
+            response.status = 400
+            action.failure
+          end
         end
       end
 
@@ -30,26 +44,26 @@ module Kurpelwoodworks
       r.on Integer do |id|
         r.is do
           r.get do
-            show_action.perform(id).to_h
+            action = show_action.perform(id)
+
+            if action.success?
+              action.value! 
+            else
+              response.status = 400
+              action.failure
+            end
           end
 
           r.post do
-            name = r.params["name"]
-            description = r.params["description"]
+            action = update_action.perform(r.params.merge({id: id}))
 
-            update_action.perform(id, name, description).to_h
+            if action.success?
+              action.value! 
+            else
+              response.status = 400
+              action.failure
+            end
           end
-        end
-      end
-
-      # route[records_search]: GET|POST /records/search
-      r.is 'search' do
-        r.get do
-          view("records/search_form")
-        end
-
-        r.post String do |search_term|
-          binding.pry
         end
       end
 

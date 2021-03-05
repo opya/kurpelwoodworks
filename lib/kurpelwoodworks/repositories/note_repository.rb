@@ -5,27 +5,28 @@ module Kurpelwoodworks
     class NoteRepository
       include Import['models.note_model']
 
-      def find(id:)
-        note = model.find(id: id) 
+      def find_by_id(id)
+        note = model[id]
         note ? to_entity(note) : nil
       end
 
-      def create!(input:)
+      def create!(input)
         note = model.new(input).save
-        note ? to_entity(note) : nil
+        to_entity(note)
       end
 
-      def update!(id:, input:)
-        note = model.find(id: id)
-        note ? to_entity(note.update(input)) : nil
-      end
+      def update!(input)
+        note = model[input.delete(:id)]
 
-      def paginate(offset:, limit:)
-        notes = model.offset(offset).limit(limit).map do |note|
+        if note
+          note.update(input)
           to_entity(note)
         end
+      end
 
-        notes
+      # paginate(offset: 0, limit: 10)
+      def paginate(offset, limit)
+        model.offset(offset).limit(limit).map{|n| to_entity(n)}
       end
 
       def count

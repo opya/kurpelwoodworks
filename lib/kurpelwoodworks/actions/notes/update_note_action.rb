@@ -1,11 +1,11 @@
 require 'kurpelwoodworks/lib/translate'
-require 'kurpelwoodworks/lib/action'
 
 module Kurpelwoodworks
   module Actions
     module Notes
-      class UpdateNoteAction < Action
-
+      class UpdateNoteAction
+        include Dry::Monads[:result]
+        include Dry::Monads::Do.for(:perform)
         include Translate
         include Import[
           repository: 'repositories.note_repository',
@@ -13,21 +13,25 @@ module Kurpelwoodworks
           validation: 'validations.note_validation'
         ]
 
-        result :note
-
         def perform(input)
-          validator = validation.call(input)
+          input_values = yield validate(input)
+          persist(input_values)
+        end
 
-          if validator.success?
-            note = repository.update!(validator.to_h)
+        private
 
-            if note
-              result.success(note: presenter.call(note))
-            else
-              result.failure(tr('note.generic.not_found'))
-            end
+        def validate(input)
+          v = validation.call(input)
+          v.success? ? Success(v.values.to_h) : Failure(errors: v.errors.to_h)
+        end
+
+        def persist(input)
+          note = repository.update!(input)
+
+          if note
+            Success(note: presenter.call(note))
           else
-            result.failure(validator.errors.to_h)
+            Failure(errors: [tr('note.generic.not_found')])
           end
         end
 

@@ -19,17 +19,24 @@ RSpec.describe Kurpelwoodworks::Actions::Notes::UpdateNoteAction do
 
   context "#perform" do
     it "fail with invalid params" do
-      expect(subject.perform({}).errors).not_to be_empty
+      expect(subject.perform({})).to be_a(Dry::Monads::Failure)
+      expect(subject.perform({}).failure).to be_truthy
+      expect(subject.perform({}).failure[:errors]).to be_truthy
     end
 
     it "update new action" do
-      expect(subject.perform(input).errors).to be_empty
+      expect(subject.perform(input)).to be_a(Dry::Monads::Success)
+      expect(subject.perform(input).value!).to be_truthy
     end
 
     it "update with invalid note" do
-      input = { id: 2, name: 'long test name', description: 'long test description' }
+      wrong_input = { id: 2, name: 'long test name', description: 'long test description' }
       expect(note_repo).to receive(:update!) { nil }
-      expect(subject.perform(input).errors).not_to be_empty
+
+      s = subject.perform(wrong_input)
+
+      expect(s).to be_a(Dry::Monads::Failure)
+      expect(s.failure).to be_truthy
     end
   end
 end
