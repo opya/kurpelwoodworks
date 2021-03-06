@@ -24,7 +24,6 @@ module Kurpelwoodworks
         end
       end
 
-      # paginate(offset: 0, limit: 10)
       def paginate(offset, limit)
         model.offset(offset).limit(limit).map{|n| to_entity(n)}
       end

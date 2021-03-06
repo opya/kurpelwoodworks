@@ -3,14 +3,13 @@ require 'pagy/extras/metadata'
 
 module Kurpelwoodworks
   class Router
+    include Pagy::Backend
     include Import[
       list_action: 'actions.notes.list_notes_action',
       show_action: 'actions.notes.show_note_action',
       create_action: 'actions.notes.create_note_action',
       update_action: 'actions.notes.update_note_action'
     ]
-
-    include Pagy::Backend
 
     hash_branch 'notes' do |r|
       # route[records_create]: GET|POST /records
