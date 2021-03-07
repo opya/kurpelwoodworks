@@ -1,5 +1,3 @@
-require 'kurpelwoodworks/lib/presenter'
-
 module Kurpelwoodworks
   module Presenters
     class TagPresenter

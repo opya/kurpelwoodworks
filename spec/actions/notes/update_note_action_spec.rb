@@ -7,7 +7,9 @@ RSpec.describe Kurpelwoodworks::Actions::Notes::UpdateNoteAction do
     Kurpelwoodworks::Entities::NoteEntity.new(
       id: 1,
       name: "test name",
-      description: "test description"
+      description: "test description",
+      created_at: Time.now,
+      updated_at: Time.now
     )
   }
 

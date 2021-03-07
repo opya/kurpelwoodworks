@@ -11,7 +11,26 @@ RSpec.describe Kurpelwoodworks::Repositories::NoteRepository do
     end
 
     it "nil when record missing" do
-      expect(subject.find_by_id(id: nil)).to be_falsy
+      expect(subject.find_by_id(nil)).to be_falsy
+    end
+
+    let(:tag_repo) { Kurpelwoodworks::Repositories::TagRepository.new }
+    let(:tag) { tag_repo.create!({ name: 'test_repo'}) }
+    let(:input_with_tags) {{ name: 'test tag', description: 'test description', tags: [tag.name] }}
+    let(:note_with_tags) { subject.create_with_tags!(input_with_tags) }
+
+    it "with tags" do
+      result = subject.find_by_id(note_with_tags.id, tags: true)
+
+      expect(result).to be_truthy
+      expect(result).to be_a(Kurpelwoodworks::Entities::NoteEntity)
+      expect(result.tags.count).to eq(1)
+      expect(result.tags[0]).to be_a(Kurpelwoodworks::Entities::TagEntity)
+      expect(result.tags[0].name).to eq(tag.name)
+    end
+
+    it "nil when record missing with tags" do
+      expect(subject.find_by_id(nil, tags: true)).to be_falsy
     end
   end
 
@@ -22,6 +41,29 @@ RSpec.describe Kurpelwoodworks::Repositories::NoteRepository do
       expect(result).to be_truthy
       expect(result).to be_a(Kurpelwoodworks::Entities::NoteEntity)
       expect(result.name).to eq(input[:name])
+    end
+  end
+
+  context "create_with_tags!" do
+    let(:tag_repo) { Kurpelwoodworks::Repositories::TagRepository.new }
+    let(:tag) { tag_repo.create!({ name: 'test_repo'}) }
+    let(:input) {{ name: 'test tag', description: 'test description', tags: [tag.name] }}
+    let(:result) { subject.create_with_tags!(input) }
+
+    it "successfully" do
+      expect(result).to be_truthy
+      expect(result).to be_a(Kurpelwoodworks::Entities::NoteEntity)
+      expect(result.tags.count).to eq(1)
+      expect(result.tags[0]).to be_a(Kurpelwoodworks::Entities::TagEntity)
+      expect(result.tags[0].name).to eq(tag.name)
+    end
+
+    it "createa without tags" do
+      result = subject.create_with_tags!(input.except(:tags))
+
+      expect(result).to be_truthy
+      expect(result).to be_a(Kurpelwoodworks::Entities::NoteEntity)
+      expect(result.tags.count).to eq(0)
     end
   end
 

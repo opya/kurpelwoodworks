@@ -1,4 +1,3 @@
-require 'kurpelwoodworks/lib/presenter'
 require 'kurpelwoodworks/presenters/tag_presenter'
 
 module Kurpelwoodworks

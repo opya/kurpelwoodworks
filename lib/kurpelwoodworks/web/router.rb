@@ -14,7 +14,6 @@ module Kurpelwoodworks
     #plugin :cors, allowed_origins: ['https://kurpelwoodworks.com/']
     plugin :cors
 
-    require 'kurpelwoodworks/web/routes/contacts'
     require 'kurpelwoodworks/web/routes/notes'
 
     route do |r|

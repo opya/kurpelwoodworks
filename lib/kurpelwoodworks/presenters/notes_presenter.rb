@@ -1,6 +1,3 @@
-require 'kurpelwoodworks/lib/presenter'
-require 'kurpelwoodworks/presenters/note_presenter'
-
 module Kurpelwoodworks
   module Presenters
     class NotesPresenter
