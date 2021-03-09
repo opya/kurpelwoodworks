@@ -6,11 +6,7 @@ set :domain, 'kurpelwoodworks.com'
 set :deploy_to, '/var/www/htdocs/kurpelwoodworks.com'
 set :repository, 'git@bitbucket.org:opya/kurpelwoodworks.git'
 set :branch, 'master'
-set :forward_agent, true     # SSH forward_agent.
-
-task :setup do
-  # command %{rbenv install 2.3.0 --skip-existing}
-end
+set :forward_agent, true
 
 desc "Deploys the current version to the server."
 task :deploy do
